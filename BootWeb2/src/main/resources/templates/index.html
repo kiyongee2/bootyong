@@ -1,0 +1,17 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>메인 페이지</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+	<div id="container">
+		<h2>게시판 프로그램입니다.</h2>
+		<img src="/static/images/healing.jpg" alt="폭포 사진">
+		<p><a th:href="@{/getBoardList}">글 목록</a>&nbsp;&nbsp;&nbsp;
+		   <a th:href="@{/login}">로그인</a>
+		</p>
+	</div>
+</body>
+</html>

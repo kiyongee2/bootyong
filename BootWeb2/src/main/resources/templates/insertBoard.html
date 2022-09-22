@@ -1,0 +1,36 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Hello~</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+	<div id="container">
+		<h2>글쓰기</h2>
+		<form th:action="@{insertBoard}" method="post">
+			<table class="tbl_reg">
+				<tr>
+					<td>제목</td>
+					<td><input type="text" name="title"></td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td><input type="text" name="writer" th:value="${session['member'].name}"></td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td>
+						<textarea name="content" rows="10" cols="50"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+					   <button type="submit">새글 등록</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
