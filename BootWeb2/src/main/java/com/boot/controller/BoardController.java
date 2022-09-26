@@ -61,6 +61,7 @@ public class BoardController {
 	//게시글 상세 조회
 	@GetMapping("/getBoard")
 	public String getBoard(Long seq, Model model) {
+		service.updateCount(seq);  //조회수 증가
 		Board board = service.getBoard(seq);
 		model.addAttribute(board);
 		return "getBoard";

@@ -15,4 +15,6 @@ public interface BoardService {
 	void updateBoard(Board board);
 	
 	void deleteBoard(Board board);
+	
+	void updateCount(Long seq);  //조회수
 }

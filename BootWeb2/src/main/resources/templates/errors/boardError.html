@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>메인 페이지</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+	<div id="container">
+		<h2>Boardexception 발생!</h2>
+		<a th:href="@{/}">메인 화면으로</a><hr>
+		<table class="exception">
+			<tr>
+				<th th:text="${exception.message}"></th>
+			</tr>
+			<tr th:each="trace : ${exception.stackTrace}">
+				<td th:text="${trace}">
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

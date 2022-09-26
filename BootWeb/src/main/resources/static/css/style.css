@@ -5,6 +5,9 @@
 a{text-decoration: none;}
 h2{padding-top: 20px;}
 
+/* index 스타일 */
+img{border-radius: 5px;}
+
 /* getBoardList 스타일 */
 .tbl_list{width: 700px; margin: 0 auto; text-align: center;}
 .tbl_list, th, td{border: 1px solid #ccc; border-collapse: collapse;}

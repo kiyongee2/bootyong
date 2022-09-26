@@ -21,6 +21,7 @@ public class Board {
 	
 	@Column(updatable=false)
 	private String writer;
+	
 	private String content;
 	
 	@Column(insertable=false, updatable=false, 

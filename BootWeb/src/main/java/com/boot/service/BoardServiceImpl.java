@@ -2,7 +2,10 @@ package com.boot.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.boot.domain.Board;
@@ -17,7 +20,9 @@ public class BoardServiceImpl implements BoardService {
 	//게시글 목록 보기
 	@Override
 	public List<Board> getBoardList() {
-		return (List<Board>) boardRepo.findAll();
+		//return boardRepo.findAll(); 오름차순
+		//글번호 내림차순 정렬
+		return boardRepo.findAll(Sort.by(Sort.Direction.DESC, "seq"));
 	}
 
 	//게시글 등록
@@ -35,10 +40,10 @@ public class BoardServiceImpl implements BoardService {
 	//게시글 수정
 	@Override
 	public void updateBoard(Board board) {	
-		Board findBoard = boardRepo.findById(board.getSeq()).get();
+		/*Board findBoard = boardRepo.findById(board.getSeq()).get();
 		findBoard.setTitle(board.getTitle());
-		findBoard.setContent(board.getContent());
-		boardRepo.save(findBoard);
+		findBoard.setContent(board.getContent());*/
+		boardRepo.save(board);
 	}
 
 	//게시글 삭제
@@ -47,4 +52,10 @@ public class BoardServiceImpl implements BoardService {
 		boardRepo.delete(board);
 	}
 
+	//조회수 증가
+	@Transactional  //트랜잭션 처리하는 어노테이션
+	@Override
+	public void updateCnt(Long seq) {
+		boardRepo.updateCnt(seq);
+	}
 }

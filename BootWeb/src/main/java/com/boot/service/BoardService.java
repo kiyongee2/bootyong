@@ -6,13 +6,15 @@ import com.boot.domain.Board;
 
 public interface BoardService {
 	
-	List<Board> getBoardList();
+	List<Board> getBoardList();  //목록 보기
 	
-	void insertBoard(Board board);
+	void insertBoard(Board board);  //새글 등록
 	
-	Board getBoard(long seq);
+	Board getBoard(long seq);  //글 상세보기
 	
-	void updateBoard(Board board);
+	void updateBoard(Board board); //글 수정하기
 	
-	void deleteBoard(Board board);
+	void deleteBoard(Board board); //글 삭제하기
+	
+	void updateCnt(Long seq);  //조회수 
 }
