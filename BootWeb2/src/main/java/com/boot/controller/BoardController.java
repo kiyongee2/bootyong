@@ -23,10 +23,14 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
+	
 	//게시글 목록 
 	@GetMapping("/getBoardList")
 	public String getBoardList(Model model) {
-		
 		List<Board> boardList = service.getBoardList();
 
 		model.addAttribute("boardList", boardList);
@@ -80,32 +84,6 @@ public class BoardController {
 		service.updateBoard(board);
 		return "redirect:getBoardList";
 	}
-	
-	//화면 개발 예제
-	@GetMapping("/hello")
-	public String hello() {
-		return "hello";
-	}
-	
-	/*@GetMapping("/getBoardList")
-	public String getBoardList(Model model) {
-		List<Board> boardList = new ArrayList<>();
-		
-		for(int i=1; i<=10; i++) {
-			Board board = new Board();
-			board.setSeq((long)i);
-			board.setTitle("게시판 프로그램 테스트");
-			board.setWriter("아기상어");
-			board.setContent("게시판 프로그램 테스트입니다...");
-			board.setCreateDate(new Date());
-			board.setCnt(0L);
-			
-			boardList.add(board);
-		}
-		model.addAttribute("boardList", boardList);
-			
-		return "getBoardList";
-	}*/
 }
 
 

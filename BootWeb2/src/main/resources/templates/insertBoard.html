@@ -4,15 +4,35 @@
 <meta charset="utf-8">
 <title>Hello~</title>
 <link rel="stylesheet" href="/static/css/style.css">
+<script>
+	function checkForm(){
+		//alert("test");
+		let title = document.getElementById("title");
+		let content = document.getElementById("content");
+		
+		if(!title.value){
+			alert("제목을 입력해주세요");
+			title.focus();
+			return false;
+		}
+		if(!content.value){
+			alert("내용을 입력해주세요");
+			title.focus();
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
+	<div th:replace="menu.html::nav"></div>
 	<div id="container">
 		<h2>글쓰기</h2>
-		<form th:action="@{insertBoard}" method="post">
+		<form th:action="@{insertBoard}" method="post"
+			  th:onsubmit="return checkForm()">
 			<table class="tbl_reg">
 				<tr>
 					<td>제목</td>
-					<td><input type="text" name="title"></td>
+					<td><input type="text" name="title" id="title" placeholder="TITLE"></td>
 				</tr>
 				<tr>
 					<td>작성자</td>
@@ -21,7 +41,8 @@
 				<tr>
 					<td>내용</td>
 					<td>
-						<textarea name="content" rows="10" cols="50"></textarea>
+						<textarea id="content" name="content" rows="10" cols="50"
+						          placeholder="CONTENT"></textarea>
 					</td>
 				</tr>
 				<tr>

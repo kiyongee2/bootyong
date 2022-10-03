@@ -6,11 +6,9 @@
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+	<div th:replace="menu.html::nav"></div>
 	<div id="container">
 		<h2>게시글 목록</h2>
-		<h3><font color="red" th:text="${session['member'].name}"></font>님 
-		          게시판 입장을 환영합니다.</h3>
-		<p><a th:href="@{/logout}"}>LOG_OUT</a></p>
 		<table class="tbl_list">
 			<thead>
 				<tr>
@@ -28,7 +26,9 @@
 				</tr>
 			</tbody>
 		</table>
-		<p><a th:href="@{/insertBoard}">새글 등록</a> </p>
+		<div class="btn_box">
+			<a th:href="@{/insertBoard}"><button type="button">글쓰기</button></a>
+		</div>
 	</div>
 </body>
 </html>

@@ -1,0 +1,116 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>login</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script>
+	function checkForm(){
+		//alert("test");
+		//변수 할당
+		//let form = document.getElementById("regForm");    //아이디 입력값
+		let id = document.getElementById("id");    //아이디 입력값
+		let pwd1 = document.getElementById("password")    //비밀번호 입력값
+		let pwd2 = document.getElementById("password_confirm") //비밀번호 확인 입력값
+		let name = document.getElementById("name")      //이름 입력값
+		let idChkVal = document.getElementById("idCheck")   //중복 버튼의 value
+		
+		//정규 표현식
+		let regExpId = /^[a-zA-Z0-9]*$/ //영문자, 숫자만(^-시작, *-반복)
+		let regExpPwd1 = /[a-zA-Z0-9]/  //영문자, 숫자
+		let regExpPwd2 = /[~!@#$%^&*()_+/]/  //특수문자
+		let regExpPwd3 = /[ㄱ-ㅎㅏ-ㅣ가-힣]/  //한글
+	
+		if(id.value.length < 4 || id.value.length > 12 || 
+				!regExpId.test(id.value)){
+			alert("아이디는 영문자, 숫자 포함 4-12자 이하로 입력해주세요 ");
+			id.focus();
+			id.select();
+			return false;
+		}else if(pwd1.value.length < 8 || pwd1.value.length > 12 ||
+				!regExpPwd1.test(pwd1.value) || !regExpPwd2.test(pwd1.value) ||
+				regExpPwd3.test(pwd1.value)){
+			alert("비밀번호는 영문자, 숫자, 특수문자 포함 8-12자 이하로 입력해주세요 ");
+			password.focus();
+			password.select();
+			return false;
+		}else if(pwd1.value != pwd2.value){
+			alert("비밀번호를 동일하게 입력해주세요");
+			password_confirm.select();
+			return false;
+		}else if(name.value == ""){
+			alert("이름을 입력해주세요");
+			name.focus();
+			return false;
+		}else if(idChkVal.value == "N"){
+			alert("아이디 중복 확인을 해주세요");
+			return false;
+		}
+	}//checkForm() 끝
+	
+	//id 중복 확인
+	function checkID(){
+		//alert("check");
+		$.ajax({
+			type: "get",
+			url: "/checkID",
+			dataType: "json",
+			data: {"id": $("#id").val()},
+			success: function(data){
+				//alert(data);
+				if(data == 1){
+					$("#check").text("이미 가입된 ID입니다.");
+					$("#check").css({"color": "red", "padding-top": "5px"});
+				}else if(data == 0){
+					$("#idCheck").attr("value", "Y");
+					$("#check").text("사용 가능한 ID입니다.");
+					$("#check").css({"padding-top": "5px"});
+				}
+			},
+			error: function(data){
+				alert("에러 발생");
+			}
+		});
+	}//checkID 끝
+</script>
+</head>
+<body>
+	<div th:replace="menu.html::nav"></div>
+	<div id="container">
+		<h2>회원 가입</h2>
+		<form th:action="@{/signup}" method="post" th:onsubmit="return checkForm()">
+			<table class="tbl_login">
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" name="id" id="id" placeholder="ID">
+					    <button type="button" id="idCheck" th:value="N" 
+							        th:onclick="checkID()">ID 중복</button>
+						<p id="check"></p>
+					</td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" name="password" id="password"
+					     	   placeholder="PASSWORD"></td>
+				</tr>
+				<tr>
+					<td>비밀번호 확인</td>
+					<td><input type="password" name="password_confirm" id="password_confirm"
+					           placeholder="PASSWORD_CONFIRM"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" name="name" id="name"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+					   <button type="submit">등록</button>
+					   <button type="reset">취소</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

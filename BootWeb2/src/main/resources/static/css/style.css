@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 /* common 스타일 */
-#container{width: 1000px; margin: 20px auto; text-align: center}
-a{text-decoration: none;}
+#container{width: 100%; margin: 20px auto; text-align: center}
+a{text-decoration: none; color: black;}
 h2{padding-top: 20px;}
 
 /* navbar 스타일 */
@@ -21,6 +21,9 @@ img{border-radius: 5px;}
 .tbl_list, th, td{border: 1px solid #ccc; border-collapse: collapse;}
 .tbl_list th, td{padding: 10px;}
 .tbl_list thead{background: #eee;}
+.tbl_list td:nth-child(2){text-align: left; padding-left: 15px;}
+.btn_box{width: 650px; margin: 20px auto; text-align: left}
+.btn_box button{padding: 10px 20px;}
 
 /* insertBoard 스타일 */
 .tbl_reg{width: 700px; margin: 0 auto;}
@@ -37,10 +40,11 @@ img{border-radius: 5px;}
 .tbl_view textarea{width: 580px;}
 
 /* login 스타일*/
-.tbl_login{width: 380px; margin: 0 auto;}
+.tbl_login{width: 420px; margin: 0 auto;}
 .tbl_login, td{border: 1px solid #ccc; border-collapse: collapse;}
 .tbl_login td{padding: 10px;}
-.tbl_login input{width: 250px; height: 30px}
+.tbl_login input{width: 200px; height: 30px}
+.error{color: #f00}
 
 
 
