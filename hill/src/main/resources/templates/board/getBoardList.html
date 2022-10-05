@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+	<!-- 본문 영역  -->
+	<div layout:fragment="content">
+		<h2>게시글 목록</h2>
+		<table class="table table-hover my-4">
+			<thead>
+				<tr>
+					<th>번호</th><th>제목</th><th>작성자</th><th>등록일</th><th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="board : ${boardList}">
+					<td th:text="${board.seq}"></td>
+					<td><a th:href="@{/board/getBoard(seq=${board.seq})}"
+					       th:text="${board.title}"></a></td>
+					<td th:text="${board.member.name}"></td>
+					<td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					<td th:text="${board.cnt}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div align="right">
+			<a th:href="@{/board/insertBoard}" class="btn btn-success">새글 등록</a>
+		</div>
+	</div>
+</html>

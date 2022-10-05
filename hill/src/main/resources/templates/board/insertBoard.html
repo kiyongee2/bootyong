@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<!-- 본문 영역  -->
+	<div layout:fragment="content">
+		<h2>글 쓰기</h2>
+		<form th:action="@{/board/insertBoard}" method="post" class="my-4" enctype="multipart/form-data">
+			<div class="form-group row">
+				<label class="col-sm-2">제목</label>
+				<div class="col-sm-3">
+					<input type="text" name="title" class="form-control">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">작성자</label>
+				<div class="col-sm-3">
+					<span sec:authentication="principal.member.name"></span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">내용</label>
+				<div class="col-sm-8">
+					<textarea name="content" rows="5" cols="50"
+					       class="form-control"></textarea>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">파일업로드</label>
+				<div class="col-sm-3">
+					<input type="file" name="uploadFile" class="form-control">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-3">
+					<button type="submit" class="btn btn-success">등록</button>
+				</div>
+			</div>
+	</div>
+</html>

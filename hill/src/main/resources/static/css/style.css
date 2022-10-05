@@ -1,0 +1,5 @@
+@charset "UTF-8";
+
+/* common 스타일 */
+.exception{text-align: left; border-collapse: collapse;} 
+.exception th{background: pink; padding: 10px;}
