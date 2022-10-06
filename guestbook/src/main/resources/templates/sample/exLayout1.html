@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<!-- fragment2 파일 전체 포함하기 -->
+	<div style="border: 1px solid #00f">
+		<th:block th:replace="~{/fragments/fragment2}">
+		</th:block>
+	</div>
+
+	<h2>Layout 1 - 1 </h2>
+	<div th:replace="~{/fragments/fragment1 :: part1}">
+	</div>
+	
+	<h2>Layout 1 - 2 </h2>
+	<div th:replace="~{/fragments/fragment1 :: part2}">
+	</div>
+	
+	<h2>Layout 1 - 3 </h2>
+	<div th:insert="~{/fragments/fragment1 :: part3}">
+	</div>
+	
+</html>

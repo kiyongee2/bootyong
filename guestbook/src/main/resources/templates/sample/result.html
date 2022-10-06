@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>upload file 목록</h2>
+	<ul th:each="file : ${files}">
+		<li><span th:text="${file.fileName}"></span>
+		<a href="#" th:href="${'/download?uuid=' + file.uuid + '&file.fileName=' + file.fileName}">[download]</a>
+	</ul>
+</body>
+</html>

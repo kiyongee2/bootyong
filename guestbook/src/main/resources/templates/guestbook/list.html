@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+      
+	<div layout:fragment="content" class="content">
+		<h2>게시글 목록</h2>
+		<table class="table table-striped my-4">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Title</th>
+					<th>Writer</th>
+					<th>Regdate</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="dto : ${result.dtoList}">
+					<td>[[${dto.gno}]]</td>
+					<td>[[${dto.title}]]</td>
+					<td>[[${dto.writer}]]</td>
+					<td>[[${dto.regDate}]]</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 페이징 처리 -->
+		<ul class="pagination justify-content-center align-items-center">
+			<li class="page-item" th:if="${result.prev}">
+				<a th:href="@{/guestbook/list(page = ${result.start-1})}" class="page-link">Previous</a>
+			<li>
+		
+			<li th:each="page: ${result.pageList}" 
+			    th:class="'page-item' + ${result.page == page ? 'active' : ''}">
+				<a th:href="@{/guestbook/list(page = ${page})}" class="page-link">[[${page}]]</a>
+			<li>
+			
+			<li class="page-item" th:if="${result.next}">
+				<a th:href="@{/guestbook/list(page = ${result.end+1})}" class="page-link">Next</a>
+			<li>
+		</ul>
+    </div>
+</html>

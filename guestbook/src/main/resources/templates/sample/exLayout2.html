@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<!-- fragment3 파일 포함하기 -->
+	<th:block th:replace="~{/fragments/fragment3 :: target(~{#ulFirst}, ~{#ulSecond})}">
+		
+		<ul id="ulFirst">
+			<li>AAA</li>
+			<li>AAA</li>
+			<li>AAA</li>
+		</ul>
+		
+		<ul id="ulSecond">
+			<li>BBB</li>
+			<li>BBB</li>
+			<li>BBB</li>
+		</ul>
+	
+	
+	</th:block>
+	
+</html>

@@ -3,12 +3,14 @@ package com.boot.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.boot.config.SecurityUser;
 import com.boot.domain.Member;
 import com.boot.service.MemberService;
 
@@ -40,7 +42,9 @@ public class MemberController {
 	
 	//회원 상세 정보
 	@GetMapping("/view")
-	public String view(String userid, Model model) {
+	public String view(String userid, Model model,
+			@AuthenticationPrincipal SecurityUser principal) {
+		//board.setMember(principal.getMember());
 		Member member = memberService.view(userid);
 		model.addAttribute("member", member);
 		return "member/view";
