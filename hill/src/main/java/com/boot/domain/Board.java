@@ -1,5 +1,6 @@
 package com.boot.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -30,9 +31,8 @@ public class Board{
 	
 	private String content;
 	
-	@Column(updatable=false, 
-			columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
-	private Date createDate;
+	@Column(updatable=false, columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
+	private LocalDateTime createDate;
 	
 	@Column(updatable=false, 
 			columnDefinition = "bigint DEFAULT 0")

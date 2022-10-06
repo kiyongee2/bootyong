@@ -1,6 +1,8 @@
 package com.boot.domain;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,6 +31,9 @@ public class Member{
 	private String password;
 	
 	private String name;
+	
+	@Column(updatable = false, columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
+	private LocalDateTime regDate;
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;

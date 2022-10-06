@@ -31,7 +31,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2">작성일</label>
 				<div class="col-sm-3">
-					<span th:text="${#dates.format(board.createDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+					<span th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
 				</div>
 			</div>
 			<div class="form-group row">

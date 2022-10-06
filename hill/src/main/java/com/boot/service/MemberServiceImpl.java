@@ -19,25 +19,31 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private PasswordEncoder pwencoder;
 
-
-	@Override
-	public Member getMember(Member member) {
-		//findById의 반환형이 Optional<T> 임
-		//Optional은 주로 null 에러를 방지하기 위한 클래스임
-		Optional<Member> findMember = memberRepo.findById(member.getUserid());
-		if(findMember.isPresent()) {
-			return findMember.get();
-		}else {
-			return null;
-		}
-	}
-
+	//회원 가입
 	@Override
 	public void signup(Member member) {
 		String encPW = pwencoder.encode(member.getPassword());
 		member.setPassword(encPW);
 		member.setRole(Role.MEMBER);
+		member.setEnabled(true);
 		memberRepo.save(member);
 	}
 
+	//회원 상세 정보
+	@Override
+	public Member view(String userid) {
+		return memberRepo.findById(userid).get();
+	}
+
+	//회원 수정
+	@Override
+	public void update(Member member) {
+		memberRepo.save(member);
+	}
+
+	//회원 삭제
+	@Override
+	public void delete(Member member) {
+		memberRepo.delete(member);
+	}
 }

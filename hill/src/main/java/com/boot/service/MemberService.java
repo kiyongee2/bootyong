@@ -4,7 +4,11 @@ import com.boot.domain.Member;
 
 public interface MemberService {
 	
-	Member getMember(Member member);  //로그인
-	
 	void signup(Member member);  //회원 가입
+	
+	Member view(String userid);  //회원 상세 정보
+	
+	void update(Member member);  //회원 수정
+	
+	void delete(Member member);  //회원 삭제
 }

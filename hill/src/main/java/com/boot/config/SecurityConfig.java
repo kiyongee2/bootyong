@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
@@ -21,9 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//사용자 정의 UserDetailsService 사용
-		http.userDetailsService(userDetailsService);
+		//http.userDetailsService(userDetailsService);
 		   
-		http.csrf().disable();   //csrf 비활성화
+		//http.csrf().disable();   //csrf 비활성화
 		//security.formLogin();        //스프링부트 제공 로그인 폼 실행
 		http.formLogin().loginPage("/member/login")
 		        .defaultSuccessUrl("/", true);
@@ -31,8 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.exceptionHandling().accessDeniedPage("/member/accessDenied");  
 		//로그아웃 후 로그인 페이지로 이동
 		http.logout().logoutUrl("/member/logout")
-		        .invalidateHttpSession(true)
-		        .logoutSuccessUrl("/");
+					 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+					 .invalidateHttpSession(true)
+					 .logoutSuccessUrl("/");
 		
 		/*http.authorizeRequests()
         .antMatchers("/", "/member/**").permitAll() //인증되지 않은 모든 사용자 접근
