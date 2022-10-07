@@ -19,7 +19,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class Guestbook extends BaseEntity{
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long gno;
@@ -33,6 +32,7 @@ public class Guestbook extends BaseEntity{
 	@Column(length = 50, nullable = false)
 	private String writer;
 	
+	//수정 시간 테스트용 메서드 추가
 	public void changeTitle(String title) {
 		this.title = title;
 	}

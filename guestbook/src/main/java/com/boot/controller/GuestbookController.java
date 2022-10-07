@@ -19,11 +19,18 @@ public class GuestbookController {
 	
 	private final GuestbookService service;
 	
+	/*@GetMapping("/list")
+	public String list() {
+		log.info("list.............");
+		
+		return "guestbook/list";
+	}*/
+	
 	@GetMapping("/list")
 	public String list(PageRequestDto pageRequestDto, Model model) {
 		log.info("list............." +  pageRequestDto);
-	
-		//model.addAttribute("result", service.getList(pageRequestDto));
+		
+		model.addAttribute("result", service.getList(pageRequestDto));
 		
 		return "guestbook/list";
 	}

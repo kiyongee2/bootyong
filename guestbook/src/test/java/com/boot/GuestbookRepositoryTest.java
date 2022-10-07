@@ -16,6 +16,7 @@ public class GuestbookRepositoryTest {
 	@Autowired
 	private GuestbookRepository guestbookRepo;
 	
+	//300개의 더미 데이터 저장
 	/*@Test
 	public void insertData() {
 		IntStream.rangeClosed(1, 300).forEach(i -> {
@@ -30,6 +31,7 @@ public class GuestbookRepositoryTest {
 		});
 	}*/
 	
+	//시간 수정 테스트 하기
 	@Test
 	public void updateTest() {
 		Optional<Guestbook> result = guestbookRepo.findById(300L);

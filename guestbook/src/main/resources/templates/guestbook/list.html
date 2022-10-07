@@ -30,7 +30,7 @@
 			<li>
 		
 			<li th:each="page: ${result.pageList}" 
-			    th:class="'page-item' + ${result.page == page ? 'active' : ''}">
+			    th:class="'page-item ' + ${result.page == page ? 'active' : ''}">
 				<a th:href="@{/guestbook/list(page = ${page})}" class="page-link">[[${page}]]</a>
 			<li>
 			

@@ -38,6 +38,10 @@ public class MemberServiceImpl implements MemberService{
 	//회원 수정
 	@Override
 	public void update(Member member) {
+		String encPW = pwencoder.encode(member.getPassword());
+		member.setPassword(encPW);
+		member.setRole(Role.MEMBER);
+		member.setEnabled(true);
 		memberRepo.save(member);
 	}
 

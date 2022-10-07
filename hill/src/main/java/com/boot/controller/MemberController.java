@@ -35,9 +35,10 @@ public class MemberController {
 	
 	//회원 가입 처리
 	@PostMapping("/signup")
-	public String signup(Member member) {
+	public String signup(Member member, Model model) {
 		memberService.signup(member);
-		return "redirect:login";
+		model.addAttribute("가입", " 회원 가입을 축하합니다.");
+		return "member/result";
 	}
 	
 	//회원 상세 정보
