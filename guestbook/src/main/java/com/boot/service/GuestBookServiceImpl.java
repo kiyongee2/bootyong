@@ -73,7 +73,7 @@ public class GuestBookServiceImpl implements GuestbookService{
 		BooleanExpression expression = qGuestbook.gno.gt(0L);  //gno > 0
 		booleanBuilder.and(expression);
 		
-		//검색 조건이 없는 경우
+		//검색 조건이 없는 경우 - null 처리
 		if(type == null || type.trim().length() == 0){
 			return booleanBuilder;
 		}
