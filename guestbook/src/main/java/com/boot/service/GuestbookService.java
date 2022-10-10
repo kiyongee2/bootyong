@@ -7,9 +7,13 @@ import com.boot.entity.Guestbook;
 
 public interface GuestbookService {
 	
-	Long register(GuestbookDto dto);
+	Long register(GuestbookDto dto);  //게시글 등록
 	
+	//게시글 목록 보기
 	PageResultDto<GuestbookDto, Guestbook> getList(PageRequestDto requestDto);
+	
+	//게시글 상세 보기
+	GuestbookDto read(Long gno);
 	
 	//dto를 Entity로 변환
 	default Guestbook dtoToEntity(GuestbookDto dto) {

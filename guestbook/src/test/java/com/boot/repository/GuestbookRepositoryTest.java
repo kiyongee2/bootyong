@@ -1,4 +1,4 @@
-package com.boot;
+package com.boot.repository;
 
 import java.util.Optional;
 import java.util.stream.IntStream;

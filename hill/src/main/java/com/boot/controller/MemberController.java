@@ -1,5 +1,6 @@
 package com.boot.controller;
 
+import java.security.Principal;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,11 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@GetMapping("/login")
-	public void login() {}
+	public void login(String error, Model model) {
+		if(error != null) {
+			model.addAttribute("error", "아이디나 비밀번호를 확인해주세요");
+		}
+	}
 	
 	@GetMapping("/logout")
 	public String logout() {
@@ -42,13 +47,28 @@ public class MemberController {
 	}
 	
 	//회원 상세 정보
-	@GetMapping("/view")
+	/*@GetMapping("/view")
 	public String view(String userid, Model model,
 			@AuthenticationPrincipal SecurityUser principal) {
 		//board.setMember(principal.getMember());
 		Member member = memberService.view(userid);
 		model.addAttribute("member", member);
 		return "member/view";
+	}*/
+	
+	@GetMapping("/view")
+	public String view(String userid, Model model, 
+			Principal principal) {
+		Member member = memberService.view(userid);
+		model.addAttribute("member", member);
+		return "member/view";
+	}
+	
+	//비밀번호 변경
+	@GetMapping("/password")
+	public String updatePassword() { 
+		
+		return "member/password";
 	}
 	
 	//회원 수정

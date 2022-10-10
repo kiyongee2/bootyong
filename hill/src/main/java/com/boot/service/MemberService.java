@@ -1,6 +1,7 @@
 package com.boot.service;
 
 import com.boot.domain.Member;
+import com.boot.dto.MemberInput;
 
 public interface MemberService {
 	
@@ -11,4 +12,6 @@ public interface MemberService {
 	void update(Member member);  //회원 수정
 	
 	void delete(Member member);  //회원 삭제
+	
+	ServiceResult updatePassword(MemberInput memberInput);
 }

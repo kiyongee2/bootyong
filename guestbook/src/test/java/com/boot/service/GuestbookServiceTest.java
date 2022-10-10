@@ -1,4 +1,4 @@
-package com.boot;
+package com.boot.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class GuestbookServiceTest {
 	@Autowired
 	private GuestbookService service;
 	
-	@Test
+	/*@Test
 	public void testRegister() {
 		GuestbookDto guestbookDto = GuestbookDto.builder()
 				.title("Sample Title")
@@ -25,7 +25,7 @@ public class GuestbookServiceTest {
 				.build();
 				
 		System.out.println(service.register(guestbookDto));
-	}
+	}*/
 	
 	/*@Test
 	public void testList() {
@@ -47,5 +47,30 @@ public class GuestbookServiceTest {
 		System.out.println("========================================");
 		resultDto.getPageList().forEach(i -> System.out.print(i + " "));
 	}*/
+	
+	@Test
+	public void testSearch() {
+		PageRequestDto pageRequestDto = PageRequestDto.builder()
+				.page(1)
+				.size(10)
+				.type("tc")
+				.keyword("가을")
+				.build();
+		
+		PageResultDto<GuestbookDto, Guestbook> resultDto = 
+				service.getList(pageRequestDto);
+		
+		System.out.println("PREV: " + resultDto.isPrev());
+		System.out.println("NEXT: " + resultDto.isNext());
+		System.out.println("TOTAL: " + resultDto.getTotalPage());
+		
+		System.out.println("========================================");
+		for(GuestbookDto guestbookDto : resultDto.getDtoList()) {
+			System.out.println(guestbookDto);
+		}
+		
+		System.out.println("========================================");
+		resultDto.getPageList().forEach(i -> System.out.print(i + " "));
+	}
 	
 }

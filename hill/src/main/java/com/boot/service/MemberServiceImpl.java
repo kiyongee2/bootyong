@@ -2,6 +2,8 @@ package com.boot.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	//회원 수정
+	@Transactional
 	@Override
 	public void update(Member member) {
 		String encPW = pwencoder.encode(member.getPassword());
