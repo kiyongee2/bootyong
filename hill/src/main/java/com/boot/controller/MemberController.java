@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.boot.config.SecurityUser;
 import com.boot.domain.Member;
+import com.boot.dto.MemberInput;
+import com.boot.dto.ServiceResult;
 import com.boot.service.MemberService;
 
 @RequestMapping("/member/")
@@ -64,11 +66,28 @@ public class MemberController {
 		return "member/view";
 	}
 	
-	//비밀번호 변경
+	//비밀번호 변경 폼 요청
 	@GetMapping("/password")
-	public String updatePassword() { 
-		
+	public String updatePassword(Model model, @AuthenticationPrincipal SecurityUser principal) { 
+		String userid = principal.getUsername();
+		Member member = memberService.view(userid);
+		model.addAttribute("member", member);
 		return "member/password";
+	}
+	
+	//비밀번호 변경 처리
+	@PostMapping("/password")
+	public String updatePassword(MemberInput parameter, 
+			@AuthenticationPrincipal SecurityUser principal,
+			Model model) {
+		String userid = principal.getUsername();
+		parameter.setUserid(userid);
+		ServiceResult result = memberService.updatePassword(parameter);
+		if(!result.isResult()) {
+			return "member/password";
+		}
+		
+		return "redirect:view";
 	}
 	
 	//회원 수정

@@ -2,6 +2,7 @@ package com.boot.service;
 
 import com.boot.domain.Member;
 import com.boot.dto.MemberInput;
+import com.boot.dto.ServiceResult;
 
 public interface MemberService {
 	
