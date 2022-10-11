@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
+		web.ignoring().antMatchers("/css/**", "/js/**", "/images/**");
 	}
 	
 	//비밀번호 암호화 : PasswordEncoder 객체를 리턴하는 passwordEncoder()
