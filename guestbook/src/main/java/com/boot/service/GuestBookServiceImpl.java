@@ -66,10 +66,11 @@ public class GuestBookServiceImpl implements GuestbookService{
 	//검색
 	private BooleanBuilder getSearch(PageRequestDto requestDto) {
 		String type = requestDto.getType();
+		String keyword = requestDto.getKeyword();
+		
 		BooleanBuilder booleanBuilder = new BooleanBuilder();
 		QGuestbook qGuestbook = QGuestbook.guestbook;
 		
-		String keyword = requestDto.getKeyword();
 		BooleanExpression expression = qGuestbook.gno.gt(0L);  //gno > 0
 		booleanBuilder.and(expression);
 		

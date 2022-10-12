@@ -24,6 +24,7 @@ public class BoardRepositoryTests {
 	@Autowired
 	BoardRepository boardRepository;
 	
+	//한 명의 사용자가 1개의 게시물 등록
 	/*@Test
 	public void insertBoard() {
 		IntStream.rangeClosed(1, 100).forEach(i -> {
@@ -37,14 +38,13 @@ public class BoardRepositoryTests {
 					.build();
 			
 			boardRepository.save(board);
-			
 		});
 	}*/
 	
 	/*@Test
 	@Transactional  //fetch 속성 지정한 후 추가함
 	public void testRead() {
-		Optional<Board> result = boardRepository.findById(250L);
+		Optional<Board> result = boardRepository.findById(100L);
 		Board board = result.get();
 		
 		System.out.println(board);
@@ -53,7 +53,7 @@ public class BoardRepositoryTests {
 	
 	/*@Test
 	public void testReadWithWriter() {
-		Object result = boardRepository.getBoardWithWriter(201L);
+		Object result = boardRepository.getBoardWithWriter(100L);
 		
 		Object[] arr = (Object[]) result;
 		
@@ -62,13 +62,14 @@ public class BoardRepositoryTests {
 	
 	/*@Test
 	public void testGetBoardWithReply() {
-		List<Object[]> result = boardRepository.getBoardWithReply(298L);
+		List<Object[]> result = boardRepository.getBoardWithReply(100L);
 		
 		for(Object[] arr : result) {
 			System.out.println(Arrays.toString(arr));
 		}
 	}*/
 	
+	//10개의 게시물, 회원, 댓글 수 가져오기
 	/*@Test
 	public void testWithReplyCount() {
 		Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
@@ -81,9 +82,10 @@ public class BoardRepositoryTests {
 		});
 	}*/
 	
+	//1개의 게시물, 회원, 댓글 수 가져오기
 	/*@Test
 	public void testRead2() {
-		Object result = boardRepository.getBoardByBno(295L);
+		Object result = boardRepository.getBoardByBno(100L);
 		
 		Object[] arr = (Object[]) result;
 		

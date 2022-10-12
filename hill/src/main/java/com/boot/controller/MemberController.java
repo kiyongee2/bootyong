@@ -24,6 +24,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	//로그인
 	@GetMapping("/login")
 	public void login(String error, Model model) {
 		if(error != null) {
@@ -31,6 +32,7 @@ public class MemberController {
 		}
 	}
 	
+	//로그아웃
 	@GetMapping("/logout")
 	public String logout() {
 		return "redirect:/";
@@ -44,7 +46,7 @@ public class MemberController {
 	@PostMapping("/signup")
 	public String signup(Member member, Model model) {
 		memberService.signup(member);
-		model.addAttribute("가입", " 회원 가입을 축하합니다.");
+		model.addAttribute("가입", "회원 가입을 축하합니다.");
 		return "member/result";
 	}
 	
@@ -60,7 +62,7 @@ public class MemberController {
 	
 	@GetMapping("/view")
 	public String view(String userid, Model model, 
-			Principal principal) {
+			@AuthenticationPrincipal SecurityUser principal) {
 		Member member = memberService.view(userid);
 		model.addAttribute("member", member);
 		return "member/view";

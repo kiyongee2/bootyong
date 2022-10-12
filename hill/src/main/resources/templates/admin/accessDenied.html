@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+      
+	<!-- 본문 영역  -->
+	<div layout:fragment="content">
+		<h2>페이지에 대한 접근 권한이 없습니다.</h2>
+		<h4>다시 로그인을 원하시면 <a th:href="@{/member/login}">여기(클릭)</a></h4>
+	</div>
+</body>
+</html>

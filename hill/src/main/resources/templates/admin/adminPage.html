@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+      
+	<!-- 본문 영역  -->
+	<div layout:fragment="content">
+		<h2>관리자님 환영합니다.</h2>
+		<a th:href="@{/board/getBoardList}">게시글 목록</a>
+	</div>
+</body>
+</html>

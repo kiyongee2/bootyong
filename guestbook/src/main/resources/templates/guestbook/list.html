@@ -74,7 +74,7 @@
 		</div>
 		
 		<!-- 모달 창-->
-		<div class="modal" tabindex="-1" role="dialog" id="myModal">
+		<div class="modal" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -94,8 +94,12 @@
 		  </div>
 		  
 		<script th:inline="javascript">
-			$(document).ready(function(){
-				let msg = [[${msg}]]
+		   $(document).ready(function(){
+			   	let msg = [[${msg}]]
+				
+				if(msg){
+					$(".modal").modal('show');
+				}
 			
 				checkModal(msg);
 			
@@ -103,15 +107,13 @@
 					if(parseInt(msg) > 0){
 						$(".modal-body").html("게시글 " + parseInt(msg) + "번이 등록되었습니다.");
 					}
-					$("#myModal").modal('show');
 				}
 				
 				//모달 창 닫기
 				$(".close").click(function(){
-					$("#myModal").modal('hide');
+					$(".modal").modal('hide');
 				});
-			});
+		   });
 		</script>
-		
     </div>
 </html>

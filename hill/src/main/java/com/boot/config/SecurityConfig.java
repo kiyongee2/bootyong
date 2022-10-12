@@ -29,23 +29,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.formLogin().loginPage("/member/login")
 		        .defaultSuccessUrl("/", true);
 		//접근 권한 없음 페이지 처리
-		http.exceptionHandling().accessDeniedPage("/member/accessDenied");  
+		http.exceptionHandling().accessDeniedPage("/admin/accessDenied");  
 		//로그아웃 후 로그인 페이지로 이동
 		http.logout().logoutUrl("/member/logout")
 					 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 					 .invalidateHttpSession(true)
 					 .logoutSuccessUrl("/");
 		
-		/*http.authorizeRequests()
-        .antMatchers("/", "/member/**").permitAll() //인증되지 않은 모든 사용자 접근
-        .antMatchers("/board/**").authenticated()  //로그인한 사용자만 접근
-        .antMatchers("/admin/**").hasRole("ADMIN");//ADMIN 권한을 가진 사용자만 접근*/
+		http.authorizeRequests()
+        	.antMatchers("/", "/member/**").permitAll() //인증되지 않은 모든 사용자 접근
+        	.antMatchers("/admin/**").hasRole("ADMIN");//ADMIN 권한을 가진 사용자만 접근*/
 		
 		//인증과 권한 설정
-		http.authorizeRequests()
+		/*http.authorizeRequests()
 			.mvcMatchers("/", "/member/**").permitAll()
 			.mvcMatchers("/admin/**").hasRole("ADMIN")
-			.anyRequest().authenticated();
+			.anyRequest().authenticated();*/
 	}
 	
 	@Override

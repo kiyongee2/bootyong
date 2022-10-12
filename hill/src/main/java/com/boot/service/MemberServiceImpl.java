@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 	public void signup(Member member) {
 		String encPW = pwencoder.encode(member.getPassword());
 		member.setPassword(encPW);
-		member.setRole(Role.MEMBER);
+		member.setRole(Role.ROLE_MEMBER);
 		member.setEnabled(true);
 		memberRepo.save(member);
 	}
@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService{
 	public void update(Member member) {
 		String encPW = pwencoder.encode(member.getPassword());
 		member.setPassword(encPW);
-		member.setRole(Role.MEMBER);
+		member.setRole(Role.ROLE_MEMBER);
 		member.setEnabled(true);
 		memberRepo.save(member);
 	}

@@ -40,7 +40,7 @@ public class BoardServiceTests {
 	
 	@Test
 	public void testGet() {
-		Long bno = 295L;
+		Long bno = 100L;
 		BoardDto boardDto = boardService.get(bno);
 		System.out.println(boardDto);
 	}

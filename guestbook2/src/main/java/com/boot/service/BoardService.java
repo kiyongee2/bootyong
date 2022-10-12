@@ -31,7 +31,7 @@ public interface BoardService {
 		return board;
 	}
 	
-	//Entity를 dto로 변환(게시글 목록 보기시 필요)
+	//Entity를 dto로 변환(게시글 목록 보기시 필요) - 3개의 파라미터 처리
 	default BoardDto entityToDto(Board board, Member member, Long replyCount) {
 		BoardDto boardDto = BoardDto.builder()
 				.bno(board.getBno())

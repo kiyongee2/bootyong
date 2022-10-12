@@ -14,7 +14,7 @@ import com.boot.repository.search.SearchBoardRepository;
 public interface BoardRepository extends JpaRepository<Board, Long>,
 SearchBoardRepository{
 	
-	//회원
+	//회원 - 1개의 Object 내에 Object[]로 나옴
 	@Query("SELECT b, w FROM Board b LEFT JOIN b.writer w WHERE b.bno = :bno")
 	Object getBoardWithWriter(@Param("bno") Long bno);
 	
