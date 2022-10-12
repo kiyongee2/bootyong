@@ -37,7 +37,7 @@ public class ReplyRepositoryTests {
 		});
 	}*/
 	
-	@Transactional
+	/*@Transactional
 	@Test
 	public void readReply1() {
 		Optional<Reply> result = replyRepository.findById(1L);
@@ -45,13 +45,13 @@ public class ReplyRepositoryTests {
 		
 		System.out.println(reply);
 		System.out.println(reply.getBoard());
-	}
+	}*/
 	
-	/*@Test
+	@Test
 	public void testListByBoard() {
 		List<Reply> replyList = replyRepository.getRepliesByBoardOrderByRno(
-								Board.builder().bno(295L).build());
+								Board.builder().bno(95L).build());
 		replyList.forEach(reply -> System.out.println(reply));
-	}*/
+	}
 	
 }

@@ -88,7 +88,7 @@
 		        <p>게시글이 등록되었습니다.</p>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary replyClose" 
+		        <button type="button" class="btn btn-secondary close" 
 		        			data-bs-dismiss="modal">Close</button>
 		      </div>
 		    </div>
@@ -100,17 +100,26 @@
 			console.log(msg);
 			
 			if(msg){
-				$(".modal").modal();
+				$(".modal").modal('show');
 			}
 			
+			checkModal(msg);
+			
+			function checkModal(msg){
+				if(parseInt(msg) > 0){
+					$(".modal-body").html("게시글 " + parseInt(msg) + "번이 등록되었습니다.");
+				}
+			}
+				
+			//검색 폼 전송
 			let searchForm = $("#searchForm");
 			$('.btn-search').click(function(){
 				searchForm.submit();
 			});
 			
 			//모달 창 닫기
-			$(".replyClose").click(function(){
-				modal.modal('hide');
+			$(".close").click(function(){
+				$(".modal").modal('hide');
 			});
 		</script>
     </div>

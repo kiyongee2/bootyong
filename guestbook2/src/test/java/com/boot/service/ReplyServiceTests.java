@@ -16,7 +16,7 @@ public class ReplyServiceTests {
 	
 	@Test
 	public void testGetList() {
-		Long bno = 295L;
+		Long bno = 95L;
 		
 		List<ReplyDto> replyDtoList = service.getList(bno);
 		

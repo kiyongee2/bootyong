@@ -25,7 +25,7 @@ public class BoardServiceTests {
 		Long bno = boardService.register(dto);
 	}*/
 	
-	/*@Test
+	@Test
 	public void testList() {
 		
 		PageRequestDto pageRequestDto = new PageRequestDto();
@@ -36,14 +36,14 @@ public class BoardServiceTests {
 		for(BoardDto boardDto : result.getDtoList()) {
 			System.out.println(boardDto);
 		}
-	}*/
+	}
 	
-	@Test
+	/*@Test
 	public void testGet() {
 		Long bno = 100L;
 		BoardDto boardDto = boardService.get(bno);
 		System.out.println(boardDto);
-	}
+	}*/
 		
 }
 

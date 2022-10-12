@@ -18,6 +18,7 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	private final ReplyRepository repository;
 
+	//댓글 등록
 	@Override
 	public Long register(ReplyDto replyDTO) {
 		Reply reply = dtoToEntity(replyDTO);
@@ -26,6 +27,7 @@ public class ReplyServiceImpl implements ReplyService{
 		return reply.getRno();
 	}
 
+	//댓글 목록 보기
 	@Override
 	public List<ReplyDto> getList(Long bno) {
 		List<Reply> result = repository.
@@ -34,12 +36,14 @@ public class ReplyServiceImpl implements ReplyService{
 				.collect(Collectors.toList());
 	}
 
+	//댓글 수정
 	@Override
 	public void modify(ReplyDto replyDto) {
 		Reply reply = dtoToEntity(replyDto);
 		repository.save(reply);
 	}
 
+	//댓글 삭제
 	@Override
 	public void remove(Long rno) {
 		repository.deleteById(rno);
