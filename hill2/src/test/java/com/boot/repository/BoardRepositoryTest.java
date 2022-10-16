@@ -1,7 +1,6 @@
 package com.boot.repository;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -19,98 +18,91 @@ import com.boot.entity.Board;
 import com.boot.entity.Member;
 
 @SpringBootTest
-public class BoardRepositoryTests {
+public class BoardRepositoryTest {
 	
 	@Autowired
-	BoardRepository boardRepository;
+	BoardRepository boardRepo;
 	
-	//한 명의 사용자가 1개의 게시물 등록
+	//100명이 게시글 100개 쓰기
 	/*@Test
 	public void insertBoard() {
 		IntStream.rangeClosed(1, 100).forEach(i -> {
-			Member member = Member.builder()
-					.email("user" + i + "@aaa.com").build();
+			Member member = Member.builder().userid("user" + i).build();
 			
 			Board board = Board.builder()
-					.title("Title... " + i)
-					.content("Content..." + i)
+					.title("Title " + i)
+					.content("Content " + i)
 					.writer(member)
+					.cnt(0L)
 					.build();
 			
-			boardRepository.save(board);
+			boardRepo.save(board);
+			
 		});
 	}*/
 	
-	/*@Test
-	@Transactional  //fetch 속성 지정한 후 추가함
-	public void testRead() {
-		Optional<Board> result = boardRepository.findById(100L);
+	//게시글과 작성자를 조회
+	/*@Transactional
+	@Test
+	public void testRead1() {
+		Optional<Board> result = boardRepo.findById(100L);
+		
 		Board board = result.get();
 		
 		System.out.println(board);
 		System.out.println(board.getWriter());
 	}*/
 	
+	//게시글 작성한 회원 조회
 	/*@Test
 	public void testReadWithWriter() {
-		Object result = boardRepository.getBoardWithWriter(100L);
+		Object result = boardRepo.getBoardWithWriter(100L);
 		
+		//회원은 여러 개의 글을 작성
 		Object[] arr = (Object[]) result;
 		
 		System.out.println(Arrays.toString(arr));
 	}*/
 	
-	/*@Test
-	public void testGetBoardWithReply() {
-		List<Object[]> result = boardRepository.getBoardWithReply(100L);
-		
-		for(Object[] arr : result) {
-			System.out.println(Arrays.toString(arr));
-		}
-	}*/
-	
-	//10개의 게시물, 회원, 댓글 수 가져오기
+	//게시글, 회원(작성자), 댓글 수 조회(목록)
 	/*@Test
 	public void testWithReplyCount() {
 		Pageable pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
-		
-		Page<Object[]> result = boardRepository.getBoardWithReplycount(pageable);
+		Page<Object[]> result = boardRepo.getBoardWithReplyCount(pageable);
 		
 		result.get().forEach(row -> {
-			Object[] arr = row;
+			
+			Object[] arr = (Object[])row;
 			System.out.println(Arrays.toString(arr));
 		});
 	}*/
 	
-	//1개의 게시물, 회원, 댓글 수 가져오기
+	//특정 게시물 조회
 	/*@Test
 	public void testRead2() {
-		Object result = boardRepository.getBoardByBno(100L);
-		
+		Object result = boardRepo.getBoardByBno(1L);
 		Object[] arr = (Object[]) result;
 		
 		System.out.println(Arrays.toString(arr));
 	}*/
 	
-	@Test
-	public void testSearch1() {
-		boardRepository.search1();
-	}
-	
+	//검색 테스트
 	/*@Test
-	public void testSearchPage() {
-		Pageable pageable = PageRequest.of(0, 10, 
-				Sort.by("bno").descending()
-					.and(Sort.by("title").ascending()));
-		
-		Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
+	public void testSearch1() {
+		boardRepo.search1();
 	}*/
+	
+	//검색 처리
+	@Test
+	public void testSearchPage() {
+		Pageable pageable = 
+				PageRequest.of(0, 10, Sort.by("bno").descending()
+								          .and(Sort.by("title").ascending()));
+		
+		//제목에 1이 포함된 글을 검색
+		Page<Object[]> result = boardRepo.searchPage("t", "1", pageable);
+	}
 }
-
-
-
-
-
 
 
 

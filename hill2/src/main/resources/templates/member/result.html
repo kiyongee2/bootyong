@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout1}">
+	  
+	<meta charset="UTF-8">
+	
+	<div layout:fragment="content" class="content">
+		<h1 th:if="${msg == '가입'}"
+		    class="alert alert-danger">회원 가입을 축하합니다.</h1>
+		<h1 th:if="${msg == '수정'}"
+		    class="alert alert-danger">회원 정보가 수정되었습니다.</h1>
+		<h1 th:if="${msg == '삭제'}"
+		    class="alert alert-danger">회원 정보가 삭제되었습니다.</h1>
+	</div>
+</html>

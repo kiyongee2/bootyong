@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout1}">
+	  
+	<meta charset="UTF-8">
+	
+	<div layout:fragment="content" class="content">
+		<h2 class="mb-4">URL 경로가 올바르지 않습니다.</h2>
+		<a th:href="@{/}">메인 화면으로</a>
+	</div>
+</html>
+
+
+

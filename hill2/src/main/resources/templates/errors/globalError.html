@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layouts/layout1}">
+	  
+	<meta charset="UTF-8">
+	
+	<div layout:fragment="content" class="content">
+		<h2 class="mb-3">Exception 발생!</h2>
+		<a th:href="@{/}">메인 화면으로</a>
+		<table class="table mt-3">
+			<tr>
+				<th th:text="${exception.message}" class="exception"></th>
+			</tr>
+			<tr th:each="trace: ${exception.stackTrace}">
+				<td th:text="${trace}">
+			</tr>
+		</table>
+	</div>
+</html>
+
