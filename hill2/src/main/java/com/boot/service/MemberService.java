@@ -11,4 +11,6 @@ public interface MemberService {
 	void update(Member member);  //회원 정보 수정
 	
 	void delete(Member member);  //회원 정보 삭제
+	
+	int checkID(String userid);  //ID 중복 체크
 }

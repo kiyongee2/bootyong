@@ -25,7 +25,7 @@ public class BoardRepositoryTests {
 	BoardRepository boardRepository;
 	
 	//한 명의 사용자가 1개의 게시물 등록
-	/*@Test
+	@Test
 	public void insertBoard() {
 		IntStream.rangeClosed(1, 100).forEach(i -> {
 			Member member = Member.builder()
@@ -39,7 +39,7 @@ public class BoardRepositoryTests {
 			
 			boardRepository.save(board);
 		});
-	}*/
+	}
 	
 	/*@Test
 	@Transactional  //fetch 속성 지정한 후 추가함

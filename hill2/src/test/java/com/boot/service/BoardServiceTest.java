@@ -49,7 +49,7 @@ public class BoardServiceTest {
 	}*/
 	
 	//게시글 수정
-	@Test
+	/*@Test
 	public void testModify() {
 		BoardDto boardDto = BoardDto.builder()
 				.bno(10L)
@@ -57,7 +57,7 @@ public class BoardServiceTest {
 				.content("내용을 수정합니다.")
 				.build();
 		boardService.modify(boardDto);
-	}
+	}*/
 }
 
 

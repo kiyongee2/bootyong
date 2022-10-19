@@ -96,34 +96,19 @@ public class BoardController {
 	
 	//게시글 수정
 	@PostMapping("/update")
-	public String update(BoardDto boardDto) {
+	public String update(BoardDto boardDto,
+			@ModelAttribute("requestDTO") PageRequestDto requestDto,
+			RedirectAttributes redirectAttributes) {
+		
 		boardService.modify(boardDto);
-		return "redirect:list";
+		
+		redirectAttributes.addAttribute("page", requestDto.getPage());
+		redirectAttributes.addAttribute("type", requestDto.getType());
+		redirectAttributes.addAttribute("keyword", requestDto.getKeyword());
+		redirectAttributes.addAttribute("bno", boardDto.getBno());
+		
+		return "redirect:read";
 	}
-	
-	//글쓰기 처리 요청
-	/*@PostMapping("/insertBoard")
-	public String insertBoard(Board board, @RequestParam MultipartFile[] uploadFile,
-			@AuthenticationPrincipal SecurityUser principal) throws IllegalStateException, IOException {
-		//파일 업로드
-		//MultipartFile[]를 파라미터로 객체 사용
-		for(MultipartFile file : uploadFile) {
-			if(!file.isEmpty()) {
-				//FileDto 객체 생성
-				FileDto dto = new FileDto(UUID.randomUUID().toString(),
-						file.getOriginalFilename(), file.getContentType());
-				
-				//파일 생성 - File 클래스의 객체는 논리적인 파일 이름임
-				File newFileName = new File(dto.getUuid() + "_" + dto.getFileName());
-				//실제 물리적인 파일로 전달해서 저장
-				file.transferTo(newFileName);
-			}
-		}
-		//글쓰기
-		board.setWriter(principal.getMember()); //인증된 회원이 글쓰기 함
-		boardService.insertBoard(board);
-		return "redirect:getBoardList";
-	}*/
 }
 
 

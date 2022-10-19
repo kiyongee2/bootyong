@@ -18,7 +18,7 @@ public class MemberRepositoryTest {
 	//회원 100명 생성
 	@Test
 	public void insertMember() {
-		IntStream.rangeClosed(1, 100).forEach(i -> {
+		IntStream.rangeClosed(1, 20).forEach(i -> {
 			
 			Member member = Member.builder()
 					.userid("user" + i)

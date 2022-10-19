@@ -24,9 +24,9 @@ public class BoardRepositoryTest {
 	BoardRepository boardRepo;
 	
 	//100명이 게시글 100개 쓰기
-	/*@Test
+	@Test
 	public void insertBoard() {
-		IntStream.rangeClosed(1, 100).forEach(i -> {
+		IntStream.rangeClosed(1, 20).forEach(i -> {
 			Member member = Member.builder().userid("user" + i).build();
 			
 			Board board = Board.builder()
@@ -39,7 +39,7 @@ public class BoardRepositoryTest {
 			boardRepo.save(board);
 			
 		});
-	}*/
+	}
 	
 	//게시글과 작성자를 조회
 	/*@Transactional

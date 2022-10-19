@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.entity.Member;
 import com.boot.service.MemberService;
@@ -23,7 +24,6 @@ public class MemberController {
 		if(error != null) {
 			model.addAttribute("error", "아이디나 비밀번호를 확인해주세요");
 		}
-		
 	}  //templates/member/login.html
 	
 	//로그아웃
@@ -42,6 +42,14 @@ public class MemberController {
 		memberService.signup(member);
 		model.addAttribute("msg", "가입");
 		return "member/result";
+	}
+	
+	//ID 중복 체크
+	@GetMapping("/checkID")
+	@ResponseBody  //데이터 전송 어노테이션
+	public int checkID(String userid) {
+		int result = memberService.checkID(userid);
+		return result;
 	}
 	
 	//회원 정보 보기

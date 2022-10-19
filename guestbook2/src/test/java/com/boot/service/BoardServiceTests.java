@@ -14,7 +14,7 @@ public class BoardServiceTests {
 	@Autowired
 	BoardService boardService;
 	
-	/*@Test
+	@Test
 	public void testRegister() {
 		BoardDto dto = BoardDto.builder()
 				.title("Test...")
@@ -23,9 +23,9 @@ public class BoardServiceTests {
 				.build();
 		
 		Long bno = boardService.register(dto);
-	}*/
+	}
 	
-	@Test
+	/*@Test
 	public void testList() {
 		
 		PageRequestDto pageRequestDto = new PageRequestDto();
@@ -36,7 +36,7 @@ public class BoardServiceTests {
 		for(BoardDto boardDto : result.getDtoList()) {
 			System.out.println(boardDto);
 		}
-	}
+	}*/
 	
 	/*@Test
 	public void testGet() {

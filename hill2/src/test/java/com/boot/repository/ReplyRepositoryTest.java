@@ -20,7 +20,7 @@ public class ReplyRepositoryTest {
 	ReplyRepository replyRepo;
 	
 	//300개의 댓글 생성
-	/*@Test
+	@Test
 	public void insertReply() {
 		IntStream.rangeClosed(1, 300).forEach(i -> {
 			//게시글 번호(bno)를 랜덤하게 생성 - 1부터 100까지
@@ -35,7 +35,7 @@ public class ReplyRepositoryTest {
 			
 			replyRepo.save(reply);
 		});
-	}*/
+	}
 	
 	//댓글 조회
 	/*@Transactional  //지연 로딩 시 사용함
@@ -50,7 +50,7 @@ public class ReplyRepositoryTest {
 	}*/
 	
 	//댓글 목록
-	@Test
+	/*@Test
 	public void testListByBoard() {
 		//100번 게시글 생성
 		Board board = Board.builder().bno(100L).build();
@@ -58,7 +58,7 @@ public class ReplyRepositoryTest {
 		List<Reply> replyList = replyRepo.getRepliesByBoardOrderByRno(board);
 		
 		replyList.forEach(reply -> System.out.println(reply));
-	}
+	}*/
 }
 
 

@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService{
 		//비밀번호 암호화
 		String encPW = pwencoder.encode(member.getPassword());
 		member.setPassword(encPW);
-		member.setRole(Role.ROLE_ADMIN); //권한 설정
+		member.setRole(Role.ROLE_MEMBER); //권한 설정
 		member.setEnabled(true);   //계정 있음
 		memberRepo.save(member);
 	}
@@ -47,5 +47,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void delete(Member member) {
 		memberRepo.delete(member);
+	}
+
+	//ID 중복 체크
+	@Override
+	public int checkID(String userid) {
+		int value = memberRepo.checkID(userid);
+		return value;
 	}
 }

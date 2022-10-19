@@ -8,8 +8,12 @@
 	
 	<div layout:fragment="content" class="content">
 		<h2>게시글 상세 보기</h2>
-		<form th:action="@{/board/update}" method="post" class="mt-4">
+		<form th:action="@{/board/update(bno = ${dto.bno}, page=${requestDto.page}, 
+			  type=${requestDto.type}, keyword =${requestDto.keyword})}" method="post" class="mt-4">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			<input type="hidden" name="page" th:value="${requestDto.page}">
+			<input type="hidden" name="type" th:value="${requestDto.type}" >
+			 <input type="hidden" name="keyword" th:value="${requestDto.keyword}" >
 			<div class="form-group row">
 				<label>번호</label>
 				<input type="text" name="bno" class="form-control"
@@ -43,7 +47,8 @@
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<a th:href="@{/board/list}" 
+				<a th:href="@{/board/list(page=${requestDto.page}, 
+				type=${requestDto.type}, keyword=${requestDto.keyword})}" 
 				   class="btn btn-primary">글목록</a>
 				<th:block sec:authorize="isAuthenticated()"
 					th:if="${#authentication.getPrincipal().getUsername() == dto.writerUserid}">
