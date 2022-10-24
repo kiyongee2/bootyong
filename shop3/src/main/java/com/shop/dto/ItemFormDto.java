@@ -34,14 +34,16 @@ public class ItemFormDto {
 	
 	private ItemSellStatus itemSellStatus;
 	
-	private List<ItemImgDto> itemImgDtoList = new ArrayList<>(); //상품 이미지 정보 저장 리스트
+	//상품 이미지 정보 저장 리스트
+	private List<ItemImgDto> itemImgDtoList = new ArrayList<>(); 
 	
-	private List<Long> itemImgIds = new ArrayList<>(); //이미지 아이디 저장 리스트
+	//이미지 아이디 저장 리스트(등록시엔 사용하지 않고 수정시에 사용됨)
+	private List<Long> itemImgIds = new ArrayList<>(); 
 	
 	//ItemFormDto를 Item Entity로 반환하는 모듈
 	private static ModelMapper modelMapper = new ModelMapper();
 	
-	//modelMapper를 이용하여 엔티티와 객체와 DTO 객체 간의 데이터를 복사하여 
+	//modelMapper를 이용하여 엔티티의 객체와 DTO 객체 간의 데이터를 복사하여 
 	//복사한 객체를 반환하는 메서드
 	public Item createItem() {
 		return modelMapper.map(this, Item.class);

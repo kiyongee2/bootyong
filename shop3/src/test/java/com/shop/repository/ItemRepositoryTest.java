@@ -41,11 +41,10 @@ public class ItemRepositoryTest {
 	}*/
 	
 	//상품 10개 저장
-	/*@Test
-	public void createItemList() {
+	/*public void createItemList() {
 		for(int i=1; i<=10; i++) {
 			Item item = new Item();
-			item.setItemNm("테스트 상품" + i);
+			item.setItemNm("테스트 상품 " + i);
 			item.setPrice(10000 + i);
 			item.setItemDetail("테스트 상품 상세 설명 " + i);
 			item.setItemSellStatus(ItemSellStatus.SELL);
@@ -53,11 +52,12 @@ public class ItemRepositoryTest {
 		
 			itemRepo.save(item);
 		}
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void findByItemNmTest() {
-		List<Item> itemList = itemRepo.findByItemNm("테스트 상품5");
+		this.createItemList();
+		List<Item> itemList = itemRepo.findByItemNm("테스트 상품 5");
 		for(Item item : itemList) {
 			System.out.println(item.toString());
 		}

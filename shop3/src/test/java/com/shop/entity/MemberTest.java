@@ -1,4 +1,4 @@
-package com.shop.service;
+package com.shop.entity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -26,6 +26,8 @@ public class MemberTest {
 
     @Test
     @DisplayName("Auditing 테스트")
+    //스프링 시큐리티에서 제공하는 어노테이션으로 @WithMockUser에 지정한 사용자가 
+    //로그인한 상태라고 가정하고 테스트 함
     @WithMockUser(username = "gildong", roles = "USER")
     public void auditingTest(){
         Member newMember = new Member();

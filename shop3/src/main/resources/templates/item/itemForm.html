@@ -57,12 +57,8 @@
 
     <form role="form" method="post" enctype="multipart/form-data" th:object="${itemFormDto}">
 
-        <p class="h2">
-            상품 등록
-        </p>
-
+        <p class="h2">상품 등록</p>
         <input type="hidden" th:field="*{id}">
-
         <div class="form-group">
             <select th:field="*{itemSellStatus}" class="custom-select">
                 <option value="SELL">판매중</option>

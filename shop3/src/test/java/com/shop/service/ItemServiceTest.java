@@ -37,6 +37,7 @@ public class ItemServiceTest {
     @Autowired
     ItemImgRepository itemImgRepository;
 
+    //MockMultipartFile 클래스를 이용하여 가짜 MultipartFile 리스트를 만들어서 반환하는 메서드
     List<MultipartFile> createMultipartFiles() throws Exception{
 
         List<MultipartFile> multipartFileList = new ArrayList<>();

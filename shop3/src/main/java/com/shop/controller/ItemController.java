@@ -108,17 +108,19 @@ public class ItemController {
     		@PathVariable("page") Optional<Integer> page, Model model){
 
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+        
         Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
 
-        model.addAttribute("items", items);
-        model.addAttribute("itemSearchDto", itemSearchDto);
+        model.addAttribute("items", items);  //조회한 상품 데이터 및 페이징 정보를 뷰에 전달함
+        //검색 조건을 유지한 채 이동할 수 있도록 뷰에 다시 전달
+        model.addAttribute("itemSearchDto", itemSearchDto); 
         model.addAttribute("maxPage", 5); //화면 하단에 보여줄 페이지 번호의 최대 개수
 
         return "item/itemMng";
     }
 	
 	//상세 페이지 이동
-	 @GetMapping(value = "/item/{itemId}")
+	@GetMapping(value = "/item/{itemId}")
     public String itemDtl(Model model, @PathVariable("itemId") Long itemId){
         ItemFormDto itemFormDto = itemService.getItemDtl(itemId);
         model.addAttribute("item", itemFormDto);

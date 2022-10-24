@@ -34,6 +34,7 @@ public class ItemService {
 
     private final ItemImgRepository itemImgRepository;
 
+    //상품 등록(상품, 이미지 리스트) 메서드
     public Long saveItem(ItemFormDto itemFormDto, List<MultipartFile> itemImgFileList) throws Exception{
 
         //상품 등록
@@ -57,7 +58,7 @@ public class ItemService {
     }
     
     //상품 조회
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)  //트랜잭션 읽기 전용
     public ItemFormDto getItemDtl(Long itemId){
     	//해당 상품의 이미지 조회
         List<ItemImg> itemImgList = itemImgRepository.findByItemIdOrderByIdAsc(itemId);

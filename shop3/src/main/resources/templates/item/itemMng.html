@@ -8,6 +8,7 @@
     <script th:inline="javascript">
 
         $(document).ready(function(){
+        	//검색 버튼 클릭시 form 태그의 전송을 막아 줌
             $("#searchBtn").on("click",function(e) {
                 e.preventDefault();
                 page(0);
@@ -52,12 +53,14 @@
             </tr>
             </thead>
             <tbody>
+            <!-- getContent()는 조회한 상품 데이터 리스트를 얻을 수 있음 -->
             <tr th:each="item, status: ${items.getContent()}">
                 <td th:text="${item.id}"></td>
                 <td>
                     <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a>
                 </td>
-               <td th:text="${item.itemSellStatus == 
+                <!-- T()는 프로젝트 내의 클래스(enum)을 사용할 수 있음 -->
+                <td th:text="${item.itemSellStatus == 
                		T(com.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절' "></td>
                 <td th:text="${item.createdBy}"></td>
                 <td th:text="${item.regTime}"></td>
@@ -65,6 +68,7 @@
             </tbody>
         </table>
 
+		<!-- 페이징 처리 -->
         <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : 
             (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
             <ul class="pagination justify-content-center">
@@ -92,7 +96,8 @@
                 </li>
             </ul>
         </div>
-
+		<!-- 페이징 처리 끝 -->
+		
         <!-- 검색 시작 -->
         <div class="form-inline justify-content-center" th:object="${itemSearchDto}">
             <select th:field="*{searchDateType}" class="form-control" style="width:auto;">

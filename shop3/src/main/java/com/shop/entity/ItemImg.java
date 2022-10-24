@@ -29,10 +29,12 @@ public class ItemImg extends BaseEntity{
 	
 	private String repimgYn;  //대표 이미지 여부
 	
+	//상품 엔티티와 다대일 관계 설정. 지연로딩
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
 	private Item item;
 	
+	//이미지 정보를 변경하는 메서드
 	public void updateItemImg(String oriImgName, String imgName, String imgUrl) {
 		this.oriImgName = oriImgName;
 		this.imgName = imgName;
