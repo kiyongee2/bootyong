@@ -88,7 +88,7 @@ public class ItemRepositoryTest {
 		}
 	}*/
 	
-	/*@Test
+	@Test
 	public void createItemList2() {
 		for(int i=1; i<=5; i++) {
 			Item item = new Item();
@@ -111,7 +111,7 @@ public class ItemRepositoryTest {
 			
 			itemRepo.save(item);
 		}
-	}*/
+	}
 	
 	//Querydsl 테스트
 	@Test

@@ -68,9 +68,9 @@
             </tbody>
         </table>
 
-		<!-- 페이징 처리 -->
-        <div th:with="start=${(items.number/maxPage)*maxPage + 1}, end=(${(items.totalPages == 0) ? 1 : 
-            (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
+		<!-- 페이징 처리 시작 -->
+        <div th:with="start=${(items.number/maxPage)*maxPage + 1}, 
+             end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
             <ul class="pagination justify-content-center">
 				<!-- Prevoius 버튼 -->
                 <li class="page-item" th:classappend="${items.first}?'disabled'">
@@ -79,14 +79,12 @@
                         <span aria-hidden='true'>Previous</span>
                     </a>
                 </li>
-
 				<!-- 현재 페이지 -->
                 <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" 
                     th:classappend="${items.number eq page-1}?'active':''">
                     <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" 
                        class="page-link">[[${page}]]</a>
                 </li>
-
 				<!-- Next 버튼 -->
                 <li class="page-item" th:classappend="${items.last}?'disabled'">
                     <a th:onclick="'javascript:page(' + ${items.number + 1} + ')'" 
@@ -95,9 +93,19 @@
                     </a>
                 </li>
             </ul>
+            <!--<p>[[${items.number}]]</p>
+            <p>[[${maxPage}]]</p>
+            <p>[[${items.totalPages}]]</p>-->
+            <!-- 페이징 처리 설명 
+             items.number = page-1
+		     page = item.number + 1(현재 페이지 번호)
+		     maxPage = 5(보여줄 페이지 수)  1 2 3 4 5
+		     items.totalPages = 전체 페이지 수(3인 경우) 1 2 3, 전체 페이지 수(7인 경우) 6 7
+		     예) 6 7 8 9 10 인 경우
+		     start = (현재 페이지 번호/보여줄 페이지수) + 1,  start = 6
+		     end = start + (보여줄 페이지수 - 1) , end = 10  -->
         </div>
 		<!-- 페이징 처리 끝 -->
-		
         <!-- 검색 시작 -->
         <div class="form-inline justify-content-center" th:object="${itemSearchDto}">
             <select th:field="*{searchDateType}" class="form-control" style="width:auto;">

@@ -53,7 +53,6 @@ public class OrderServiceTest {
         Member member = new Member();
         member.setEmail("test@test.com");
         return memberRepository.save(member);
-
     }
 
     @Test
@@ -63,8 +62,8 @@ public class OrderServiceTest {
         Member member = saveMember();
 
         OrderDto orderDto = new OrderDto();
-        orderDto.setCount(10);
-        orderDto.setItemId(item.getId());
+        orderDto.setCount(10);   //주문 수량
+        orderDto.setItemId(item.getId()); //주문할 상품
 
         Long orderId = orderService.order(orderDto, member.getEmail());
         Orders order = orderRepository.findById(orderId)
@@ -73,7 +72,7 @@ public class OrderServiceTest {
         List<OrderItem> orderItems = order.getOrderItems();
 
         int totalPrice = orderDto.getCount()*item.getPrice();
-
+        System.out.println(totalPrice);
         assertEquals(totalPrice, order.getTotalPrice());
     }
 

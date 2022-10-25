@@ -19,25 +19,17 @@
                 calculateToalPrice();
             });
         });
-		
-		//현재 주문할 수량과 상품 한 개당 가격을 곱해서 결제 금액을 구해주는 함수
+
         function calculateToalPrice(){
             var count = $("#count").val();
             var price = $("#price").val();
-            var totalPrice = price * count;
+            var totalPrice = price*count;
             $("#totalPrice").html(totalPrice + '원');
         }
 
         function order(){
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
-            /*$(function() {
-				if(token && header){
-				    $(document).ajaxSend(function(e, xhr, options) {
-				        xhr.setRequestHeader(header, token);
-				    });
-				}
-			});*/
 
             var url = "/order";
             var paramData = {
@@ -53,7 +45,7 @@
                 contentType : "application/json",
                 data     : param,
                 beforeSend : function(xhr){
-                    //데이터를 전송하기 전에 헤더에 csrf값을 설정
+                    /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
                     xhr.setRequestHeader(header, token);
                 },
                 dataType : "json",
@@ -75,7 +67,7 @@
             });
         }
 
-        /*function addCart(){
+        function addCart(){
             var token = $("meta[name='_csrf']").attr("content");
             var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -93,7 +85,7 @@
                 contentType : "application/json",
                 data     : param,
                 beforeSend : function(xhr){
-                    //데이터를 전송하기 전에 헤더에 csrf값을 설정
+                    /* 데이터를 전송하기 전에 헤더에 csrf값을 설정 */
                     xhr.setRequestHeader(header, token);
                 },
                 dataType : "json",
@@ -113,7 +105,7 @@
 
                 }
             });
-        }*/
+        }
 
     </script>
 </th:block>

@@ -31,9 +31,9 @@ public class OrderItem extends BaseEntity{
 		OrderItem orderItem = new OrderItem();
 		orderItem.setItem(item);
 		orderItem.setCount(count);
-		orderItem.setOrderPrice(item.getPrice());
+		orderItem.setOrderPrice(item.getPrice());  //상품 가격을 주문 가격으로 세팅
 		
-		item.removeStock(count);
+		item.removeStock(count); //주문 수량 만큼 상품의 재고 수량 감소시킴
 		return orderItem;
 	}
 	

@@ -44,11 +44,13 @@ public class Orders extends BaseEntity{
 	@OneToMany(mappedBy="orders", cascade=CascadeType.ALL)
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
+	//주문 상품 추가
 	public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
-        orderItem.setOrders(this);
+        orderItem.setOrders(this);  //Orders를 orderItem에 세팅
     }
 
+	//주문 추가
     public static Orders createOrder(Member member, List<OrderItem> orderItemList) {
         Orders order = new Orders();
         order.setMember(member);
@@ -62,6 +64,7 @@ public class Orders extends BaseEntity{
         return order;
     }
 
+    //총 주문 금액 계산
     public int getTotalPrice() {
         int totalPrice = 0;
         for(OrderItem orderItem : orderItems){

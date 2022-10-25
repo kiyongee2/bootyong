@@ -74,6 +74,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
     //queryFactory 객체를 이용해서 쿼리를 생성함
 	@Override
 	public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+		//검색한 리스트
 		List<Item> content = queryFactory
                 .selectFrom(QItem.item)
                 .where(regDtsAfter(itemSearchDto.getSearchDateType()),
@@ -85,13 +86,14 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                 .limit(pageable.getPageSize())   //한 번에 가지고 올 최대 개수 지정
                 .fetch();  //조회 대상 리스트 반환
 		
-
+		//검색한 전체 개수
         long total = queryFactory.select(Wildcard.count).from(QItem.item)
                 .where(regDtsAfter(itemSearchDto.getSearchDateType()),
                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                         searchByLike(itemSearchDto.getSearchBy(), itemSearchDto.getSearchQuery()))
-                .fetchOne();  //조회 대상 1건 반환
+                .fetchOne();  
 
+        //조회한 데이터를 Page 클래스의 구현체인 Pageimpl 객체로 반환함
         return new PageImpl<>(content, pageable, total);
 	}
 	

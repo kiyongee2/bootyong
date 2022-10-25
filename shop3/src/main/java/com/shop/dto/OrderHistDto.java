@@ -23,9 +23,9 @@ public class OrderHistDto {
     private String orderDate; //주문날짜
     private OrderStatus orderStatus; //주문 상태
 
+    //주문 상품리스트
     private List<OrderItemDto> orderItemDtoList = new ArrayList<>();
 
-    //주문 상품리스트
     public void addOrderItemDto(OrderItemDto orderItemDto){
         orderItemDtoList.add(orderItemDto);
     }	

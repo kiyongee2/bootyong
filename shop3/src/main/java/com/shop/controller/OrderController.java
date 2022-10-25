@@ -33,6 +33,7 @@ public class OrderController {
 	
 	private final OrderService orderService;
 	
+	//주문하기
 	@PostMapping(value = "/order")
     public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto
             , BindingResult bindingResult, Principal principal){
@@ -41,7 +42,7 @@ public class OrderController {
             StringBuilder sb = new StringBuilder();
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 
-            for (FieldError fieldError : fieldErrors) {
+            for (FieldError fieldError : fieldErrors) {  //에러 정보를 ResponseEntity 객체에 담아서 전달
                 sb.append(fieldError.getDefaultMessage());
             }
 
@@ -52,18 +53,21 @@ public class OrderController {
         Long orderId;
 
         try {
-            orderId = orderService.order(orderDto, email);
+            orderId = orderService.order(orderDto, email);  //주문 로직 호출
         } catch(Exception e){
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
+        //결과값으로 생성된 주문 번호와 요청이 성공했다는 HTTP 응답 상태 코드를 반환
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 	
+	//구매 이력
 	@GetMapping(value = {"/orders", "/orders/{page}"})
     public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, Model model){
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4); //한 번에 가져올 총 개수는 4개
+        //현재 로그인한 회원은 이메일과 페이징 객체를 파라미터로 전달하여 주문 목록 데이터를 리턴 받음
         Page<OrderHistDto> ordersHistDtoList = orderService.getOrderList(principal.getName(), pageable);
 
         model.addAttribute("orders", ordersHistDtoList);
@@ -71,5 +75,17 @@ public class OrderController {
         model.addAttribute("maxPage", 5);
 
         return "order/orderHist";
+    }
+	
+	//주문 취소
+	@PostMapping("/order/{orderId}/cancel")
+    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , Principal principal){
+
+        if(!orderService.validateOrder(orderId, principal.getName())){
+            return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+
+        orderService.cancelOrder(orderId);
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 }

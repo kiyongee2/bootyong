@@ -94,7 +94,7 @@ public class ItemService {
     	return item.getId();
     }
     
-    //상품 데이터 조회
+    //상품 데이터 검색
     @Transactional(readOnly = true)
     public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
     	return itemRepository.getAdminItemPage(itemSearchDto, pageable);
