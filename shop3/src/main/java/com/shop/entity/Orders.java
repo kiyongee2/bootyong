@@ -53,15 +53,16 @@ public class Orders extends BaseEntity{
 	//주문 추가
     public static Orders createOrder(Member member, List<OrderItem> orderItemList) {
         Orders order = new Orders();
-        order.setMember(member);
+        order.setMember(member);  //상품을 주문한 회원 세팅
 
+        //장바구니 페이지에서는 한 번에 여러개의 상품을 주문할 수 있음
         for(OrderItem orderItem : orderItemList) {
             order.addOrderItem(orderItem);
         }
 
-        order.setOrderStatus(OrderStatus.ORDER);
-        order.setOrderDate(LocalDateTime.now());
-        return order;
+        order.setOrderStatus(OrderStatus.ORDER);  //주문 상태를 ORDER로 설정
+        order.setOrderDate(LocalDateTime.now());  //현재 시간을 주문 시간으로 설정
+        return order; 
     }
 
     //총 주문 금액 계산

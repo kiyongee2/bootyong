@@ -59,7 +59,7 @@ public class OrderService {
         return order.getId();
     }
     
-    //구매 이력
+    //구매 이력 - 주문 목록 조회
     @Transactional(readOnly = true)
     public Page<OrderHistDto> getOrderList(String email, Pageable pageable) {
 
@@ -76,6 +76,7 @@ public class OrderService {
             	//대표 이미지 조회
                 ItemImg itemImg = 
                 		itemImgRepository.findByItemIdAndRepimgYn(orderItem.getItem().getId(), "Y");
+                
                 OrderItemDto orderItemDto =
                         new OrderItemDto(orderItem, itemImg.getImgUrl());
                 orderHistDto.addOrderItemDto(orderItemDto);

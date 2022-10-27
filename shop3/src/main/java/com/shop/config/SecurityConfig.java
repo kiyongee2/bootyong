@@ -40,8 +40,9 @@ public class SecurityConfig{
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
+        //ajax 통신 핸들링
         http.exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+            .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 
         return http.build();
     }

@@ -64,7 +64,8 @@ public class OrderController {
 	
 	//구매 이력
 	@GetMapping(value = {"/orders", "/orders/{page}"})
-    public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, Model model){
+    public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, 
+    		Model model){
 
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 4); //한 번에 가져올 총 개수는 4개
         //현재 로그인한 회원은 이메일과 페이징 객체를 파라미터로 전달하여 주문 목록 데이터를 리턴 받음
@@ -79,7 +80,8 @@ public class OrderController {
 	
 	//주문 취소
 	@PostMapping("/order/{orderId}/cancel")
-    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId , Principal principal){
+    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId, 
+    		Principal principal){
 
         if(!orderService.validateOrder(orderId, principal.getName())){
             return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);

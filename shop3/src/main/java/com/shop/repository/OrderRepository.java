@@ -12,15 +12,13 @@ import com.shop.entity.Orders;
 public interface OrderRepository extends JpaRepository<Orders, Long>{
 	
 	//현재 로그인한 사용자의 주문 데이터를 페이징 조건에 맞춰서 조회함
-	@Query("select o from Orders o " +
-            "where o.member.email = :email " +
-            "order by o.orderDate desc"
-    )
+	@Query("SELECT o FROM Orders o " +
+           "WHERE o.member.email = :email " +
+           "ORDER BY o.orderDate desc")
     List<Orders> findOrders(@Param("email") String email, Pageable pageable);
 
 	//현재 로그인한 회원의 주문 개수가 몇 개인지 조회
-    @Query("select count(o) from Orders o " +
-            "where o.member.email = :email"
-    )
+    @Query("SELECT count(o) FROM Orders o " +
+            "WHERE o.member.email = :email")
     Long countOrder(@Param("email") String email);
 }

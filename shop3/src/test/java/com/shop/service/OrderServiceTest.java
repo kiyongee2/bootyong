@@ -41,9 +41,9 @@ public class OrderServiceTest {
 
     public Item saveItem(){
         Item item = new Item();
-        item.setItemNm("테스트 상품");
-        item.setPrice(10000);
-        item.setItemDetail("테스트 상품 상세 설명");
+        item.setItemNm("test 상품");
+        item.setPrice(20000);
+        item.setItemDetail("test 상품 상세 설명");
         item.setItemSellStatus(ItemSellStatus.SELL);
         item.setStockNumber(100);
         return itemRepository.save(item);
@@ -51,15 +51,15 @@ public class OrderServiceTest {
 
     public Member saveMember(){
         Member member = new Member();
-        member.setEmail("test@test.com");
+        member.setEmail("test5@test.com");
         return memberRepository.save(member);
     }
 
     @Test
     @DisplayName("주문 테스트")
     public void order(){
-        Item item = saveItem();
-        Member member = saveMember();
+        Item item = this.saveItem();
+        Member member = this.saveMember();
 
         OrderDto orderDto = new OrderDto();
         orderDto.setCount(10);   //주문 수량
@@ -76,7 +76,7 @@ public class OrderServiceTest {
         assertEquals(totalPrice, order.getTotalPrice());
     }
 
-    @Test
+    /*@Test
     @DisplayName("주문 취소 테스트")
     public void cancelOrder(){
         Item item = saveItem();
@@ -93,6 +93,6 @@ public class OrderServiceTest {
 
         assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
         assertEquals(100, item.getStockNumber());
-    }
+    }*/
 
 }

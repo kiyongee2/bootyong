@@ -14,10 +14,12 @@ public class OrderItem extends BaseEntity{
 	@Column(name="order_item_id")
 	private Long id;
 	
+	//하나의 상품은 여러 주문 상품으로 들어갈 수 있음. 주문 상품과 상품이 다대일 관계
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="item_id")
 	private Item item;
 	
+	//한 번에 여러개의 상품 주문. 주문 상품과 주문이 다대일 관계
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="orders_id")
 	private Orders orders;
@@ -26,7 +28,7 @@ public class OrderItem extends BaseEntity{
 	
 	private int count;       //주문 수량
 	
-	//OrderItem 객체 생성
+	//주문할 상품과 수량으로 OrderItem 객체 생성
 	public static OrderItem createOrderItem(Item item, int count) {
 		OrderItem orderItem = new OrderItem();
 		orderItem.setItem(item);

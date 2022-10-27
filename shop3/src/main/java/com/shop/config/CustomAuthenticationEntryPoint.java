@@ -11,7 +11,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-	@Override
+	/*@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
 		if("XMLHttpRequest".equals(request.getHeader("x-requested-with"))) {
@@ -19,7 +19,12 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 		}else {
 			response.sendRedirect("/members/login");
 		}
-
-	}
+	}*/
+	
+	@Override
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+             AuthenticationException authException) throws IOException, ServletException {
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+    }
 
 }

@@ -70,7 +70,8 @@
 
 		<!-- 페이징 처리 시작 -->
         <div th:with="start=${(items.number/maxPage)*maxPage + 1}, 
-             end=(${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
+             end=(${(items.totalPages == 0) ? 1 : 
+                    (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
             <ul class="pagination justify-content-center">
 				<!-- Prevoius 버튼 -->
                 <li class="page-item" th:classappend="${items.first}?'disabled'">
@@ -93,9 +94,10 @@
                     </a>
                 </li>
             </ul>
-            <!--<p>[[${items.number}]]</p>
+            <p>[[${items.number}]]</p>
             <p>[[${maxPage}]]</p>
-            <p>[[${items.totalPages}]]</p>-->
+            <p>[[${items.totalPages}]]</p>
+            <p>[[${page}]]</p>
             <!-- 페이징 처리 설명 
              items.number = page-1
 		     page = item.number + 1(현재 페이지 번호)

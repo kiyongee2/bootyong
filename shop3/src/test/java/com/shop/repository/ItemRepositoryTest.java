@@ -88,7 +88,7 @@ public class ItemRepositoryTest {
 		}
 	}*/
 	
-	@Test
+	/*@Test
 	public void createItemList2() {
 		for(int i=1; i<=5; i++) {
 			Item item = new Item();
@@ -111,7 +111,7 @@ public class ItemRepositoryTest {
 			
 			itemRepo.save(item);
 		}
-	}
+	}*/
 	
 	//Querydsl 테스트
 	@Test
@@ -122,19 +122,24 @@ public class ItemRepositoryTest {
 		int price = 10003;
 		String itemSellStatus = "SELL";
 		
+		//상세 설명 조건
 		booleanBuilder.and(item.itemDetail.like("%" + itemDetail + "%"));
+		//가격 조건
 		booleanBuilder.and(item.price.gt(price));
-		
+		//상품 상태 조건
 		if(StringUtils.equals(itemSellStatus, ItemSellStatus.SELL)) {
 			booleanBuilder.and(item.itemSellStatus.eq(ItemSellStatus.SELL));
 		}
 		
+		//정렬 객체 생성
 		Pageable pageable = PageRequest.of(0, 5);
 		Page<Item> itemPagingResult =
 				itemRepo.findAll(booleanBuilder, pageable);
 		System.out.println("total elements : " + itemPagingResult.getTotalElements() );
 		
+		//검색 결과 상품 리스트 출력
 		List<Item> resultItemList = itemPagingResult.getContent();
+		
 		for(Item resultItem : resultItemList) {
 			System.out.println(resultItem.toString());
 		}
