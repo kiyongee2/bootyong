@@ -76,7 +76,7 @@ public class OrderServiceTest {
         assertEquals(totalPrice, order.getTotalPrice());
     }
 
-    /*@Test
+    @Test
     @DisplayName("주문 취소 테스트")
     public void cancelOrder(){
         Item item = saveItem();
@@ -93,6 +93,6 @@ public class OrderServiceTest {
 
         assertEquals(OrderStatus.CANCEL, order.getOrderStatus());
         assertEquals(100, item.getStockNumber());
-    }*/
+    }
 
 }

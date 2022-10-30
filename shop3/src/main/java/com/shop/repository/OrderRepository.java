@@ -14,11 +14,11 @@ public interface OrderRepository extends JpaRepository<Orders, Long>{
 	//현재 로그인한 사용자의 주문 데이터를 페이징 조건에 맞춰서 조회함
 	@Query("SELECT o FROM Orders o " +
            "WHERE o.member.email = :email " +
-           "ORDER BY o.orderDate desc")
+           "ORDER BY o.orderDate DESC")
     List<Orders> findOrders(@Param("email") String email, Pageable pageable);
 
 	//현재 로그인한 회원의 주문 개수가 몇 개인지 조회
-    @Query("SELECT count(o) FROM Orders o " +
+    @Query("SELECT COUNT(o) FROM Orders o " +
             "WHERE o.member.email = :email")
     Long countOrder(@Param("email") String email);
 }

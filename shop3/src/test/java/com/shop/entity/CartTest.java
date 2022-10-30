@@ -37,7 +37,7 @@ public class CartTest {
 	
 	public Member createMember() {
 		MemberFormDto memberFormDto = new MemberFormDto();
-		memberFormDto.setEmail("test2@cart.com");
+		memberFormDto.setEmail("test@cart.com");
 		memberFormDto.setName("홍길동");
 		memberFormDto.setAddress("인천광역시 부평구");
 		memberFormDto.setPassword("1234");

@@ -81,7 +81,7 @@ public class ItemRepositoryCustomImpl implements ItemRepositoryCustom{
                         searchSellStatusEq(itemSearchDto.getSearchSellStatus()),
                         searchByLike(itemSearchDto.getSearchBy(),
                                 itemSearchDto.getSearchQuery()))
-                .orderBy(QItem.item.id.desc())
+                .orderBy(QItem.item.id.desc())   //id 기준 내림차순 정렬
                 .offset(pageable.getOffset())    //데이터를 가져올 시작 인덱스 지정
                 .limit(pageable.getPageSize())   //한 번에 가지고 올 최대 개수 지정
                 .fetch();  //조회 대상 리스트 반환

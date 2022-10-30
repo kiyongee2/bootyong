@@ -35,7 +35,7 @@ public class OrderController {
 	
 	//주문하기
 	@PostMapping(value = "/order")
-    public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto
+    public @ResponseBody ResponseEntity<?> order(@RequestBody @Valid OrderDto orderDto
             , BindingResult bindingResult, Principal principal){
 
         if(bindingResult.hasErrors()){
@@ -62,7 +62,8 @@ public class OrderController {
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
 	
-	//구매 이력
+	//주문(구매) 내역
+	//페이지 진입시 페이지번호가 없는 경우와 있는 경우
 	@GetMapping(value = {"/orders", "/orders/{page}"})
     public String orderHist(@PathVariable("page") Optional<Integer> page, Principal principal, 
     		Model model){

@@ -22,7 +22,7 @@ public class Item extends BaseEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="item_id")
-	private Long id;        //상품 코드
+	private Long id;        //상품 아이디
 	
 	@Column(nullable=false, length=50)
 	private String itemNm;  //상품명
@@ -60,7 +60,7 @@ public class Item extends BaseEntity{
 		this.stockNumber = restStock;
 	}
 	
-	//재고 증가
+	//재고 증가(주문 취소시)
 	public void addStock(int stockNumber){
         this.stockNumber += stockNumber;
     }

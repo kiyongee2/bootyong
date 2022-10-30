@@ -32,29 +32,29 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class OrderService {
 	
-	private final ItemRepository itemRepository;
+	private final ItemRepository itemRepo;
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepo;
 
-    private final OrderRepository orderRepository;
+    private final OrderRepository orderRepo;
     
-    private final ItemImgRepository itemImgRepository;
+    private final ItemImgRepository itemImgRepo;
     
-    //주문하기
+    //주문하기(바로 구매)
     public Long order(OrderDto orderDto, String email){
     	//주문할 상품 조회
-        Item item = itemRepository.findById(orderDto.getItemId())
+        Item item = itemRepo.findById(orderDto.getItemId())
                 .orElseThrow(EntityNotFoundException::new);
 
         //로그인한 회원 정보 조회
-        Member member = memberRepository.findByEmail(email);
+        Member member = memberRepo.findByEmail(email);
 
         //회원 정보와 주문할 상품 리스트 정보를 이용하여 주문 엔티티를 생성
         List<OrderItem> orderItemList = new ArrayList<>();
         OrderItem orderItem = OrderItem.createOrderItem(item, orderDto.getCount());
         orderItemList.add(orderItem);
         Orders order = Orders.createOrder(member, orderItemList);
-        orderRepository.save(order);  //주문 엔티티 저장
+        orderRepo.save(order);  //주문 엔티티 저장
 
         return order.getId();
     }
@@ -63,8 +63,8 @@ public class OrderService {
     @Transactional(readOnly = true)
     public Page<OrderHistDto> getOrderList(String email, Pageable pageable) {
 
-        List<Orders> orders = orderRepository.findOrders(email, pageable); //주문 조회
-        Long totalCount = orderRepository.countOrder(email);  //주문 총개수
+        List<Orders> orders = orderRepo.findOrders(email, pageable); //주문 조회
+        Long totalCount = orderRepo.countOrder(email);  //주문 총개수
 
         //주문 리스트를 순회하면서 구매 이력 페이지에 전달할 DTO를 생성함
         List<OrderHistDto> orderHistDtos = new ArrayList<>();
@@ -75,7 +75,7 @@ public class OrderService {
             for (OrderItem orderItem : orderItems) {
             	//대표 이미지 조회
                 ItemImg itemImg = 
-                		itemImgRepository.findByItemIdAndRepimgYn(orderItem.getItem().getId(), "Y");
+                		itemImgRepo.findByItemIdAndRepimgYn(orderItem.getItem().getId(), "Y");
                 
                 OrderItemDto orderItemDto =
                         new OrderItemDto(orderItem, itemImg.getImgUrl());
@@ -92,8 +92,8 @@ public class OrderService {
     //현재 로그인한 사용자와 주문 데이터를 생성한 사용자가 같은지 검사
     @Transactional(readOnly = true)
     public boolean validateOrder(Long orderId, String email){
-        Member curMember = memberRepository.findByEmail(email);
-        Orders order = orderRepository.findById(orderId)
+        Member curMember = memberRepo.findByEmail(email);
+        Orders order = orderRepo.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
         Member savedMember = order.getMember();
 
@@ -106,8 +106,29 @@ public class OrderService {
 
     //주문 취소
     public void cancelOrder(Long orderId){
-        Orders order = orderRepository.findById(orderId)
+        Orders order = orderRepo.findById(orderId)
                 .orElseThrow(EntityNotFoundException::new);
         order.cancelOrder();
     }
+    
+    //장바구니에서 주문할 상품 데이터를 받아서 주문하기
+    public Long orders(List<OrderDto> orderDtoList, String email) {
+    	Member member = memberRepo.findByEmail(email);
+    	List<OrderItem> orderItemList = new ArrayList<>();
+    	
+    	for(OrderDto orderDto : orderDtoList) {
+    		Item item = itemRepo.findById(orderDto.getItemId())
+    				.orElseThrow(EntityNotFoundException::new);
+    		OrderItem orderItem = 
+    				OrderItem.createOrderItem(item, orderDto.getCount());
+    		orderItemList.add(orderItem);
+    	}
+    	
+    	//주문 객체 생성
+    	Orders order = Orders.createOrder(member, orderItemList);
+    	orderRepo.save(order); //주문 데이터 저장
+    	
+    	return order.getId();
+    }
+    
 }
