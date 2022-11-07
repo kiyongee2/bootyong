@@ -129,13 +129,13 @@ public class CartService {
     	
     	Long orderId = orderService.orders(orderDtoList, email); //주문 로직 호출
     	
-    	//주문 상품 장바구니 제거
-    	for(CartOrderDto cartOrderDto : cartOrderDtoList) {
+    	//주문후 장바구니 상품 삭제
+    	/*for(CartOrderDto cartOrderDto : cartOrderDtoList) {
     		CartItem cartItem = cartItemRepo.findById(cartOrderDto.getCartItemId())
     				.orElseThrow(EntityNotFoundException::new);
     		
     		cartItemRepo.delete(cartItem);
-    	}
+    	}*/
     	
     	return orderId;
     }

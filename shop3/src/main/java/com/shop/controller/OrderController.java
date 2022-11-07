@@ -81,7 +81,7 @@ public class OrderController {
 	
 	//주문 취소
 	@PostMapping("/order/{orderId}/cancel")
-    public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId") Long orderId, 
+    public @ResponseBody ResponseEntity<?> cancelOrder(@PathVariable("orderId") Long orderId, 
     		Principal principal){
 
         if(!orderService.validateOrder(orderId, principal.getName())){
